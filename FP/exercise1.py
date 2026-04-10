@@ -1,3 +1,4 @@
+# Dvir Farkash 333228062
 # question 2 import
 import MenuForTar1
 
@@ -61,11 +62,36 @@ def extractNumbers(listParam):
             numbers.extend(extractNumbers(item))
     return numbers
 
+# question 4:
+def shiftL(binNr, N):
+    result = binNr[N:] + '0' * N
+    return result
 
+def shiftR(binNr, N):
+    result = '0' * N + binNr[:-N]
+    return result
+
+def shiftCL(binNr, N):
+    result = binNr[N:] + binNr[:N]
+    return result
+
+def shiftCR(binNr, N):
+    result = binNr[-N:] + binNr[:-N]
+    return result 
+
+def question4():
+    print(f"shiftL 2 of 1101100101: {shiftL('1101100101', 2)}")
+    print(f"shiftR 2 of 1101100101: {shiftR('1101100101', 2)}")
+    print(f"shiftCL 2 of 1101100101: {shiftCL('1101100101', 2)}")
+    print(f"shiftCR 2 of 1101100101: {shiftCR('1101100101', 2)}")
+
+# question 5
+
+    
 # running
 def main():
-	lfuncs = [question1, MenuForTar1.question2, question3]
-	lstrs = ["exit", "question 1: verify triangle sides lengths", "question 2: area and volume of different shapes", "question 3: print middle values"]
+	lfuncs = [question1, MenuForTar1.question2, question3, question4]
+	lstrs = ["exit", "question 1: verify triangle sides lengths", "question 2: area and volume of different shapes", "question 3: print middle values", "question 4: shift numbers"]
 
 	while True:
 		print("your choices:")
