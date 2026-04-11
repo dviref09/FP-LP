@@ -1,6 +1,4 @@
-#
-#  Example program for Targil 1
-#
+# Dvir Farkash 333228062
 import math
 from myboolfuncs import *
 #
