@@ -99,11 +99,32 @@ def question4():
         print("\n".join(map(lambda n: f"{n} {m(n)}", range(1, n + 1))))
     except ValueError:
         print("ERROR: Input number is incorrect!")
+        
+# question 5 
+def add3dicts(d1, d2, d3):
+    allKeys = set(d1.keys()) | set(d2.keys()) | set(d3.keys())
+    getKeyTuple = lambda key: tuple(set(map(lambda d: d[key], filter(lambda d: key in d, [d1, d2, d3]))))
+    getKeyVal = lambda key: (key, getKeyTuple(key) if len(getKeyTuple(key)) > 1 else  getKeyTuple(key)[0])
+    
+    return dict(map(getKeyVal, allKeys))
+    
+def question5():
+    try:
+        dict1 = eval(input("Enter a dictionary: "))
+        dict2 = eval(input("Enter a dictionary: "))
+        dict3 = eval(input("Enter a dictionary: "))
+    except ValueError:
+        print("ERROR: Input is incorrect!")
+        return    
+    if (isinstance(dict1, dict) != True or isinstance(dict2, dict) != True or isinstance(dict3, dict) != True):
+        print("ERROR: Input is incorrect!")
+    else:
+        print(add3dicts(dict1, dict2, dict3))
     
 # running
 def main():
-    lfuncs = [question1, question2, question3, question4]
-    lstrs = ["exit", "penta numbers", "sum digits", "palindrome check", "series claculation"]
+    lfuncs = [question1, question2, question3, question4, question5]
+    lstrs = ["exit", "penta numbers", "sum digits", "palindrome check", "series calculation", "merging dictionaries"]
     
     while True:
         print("your choices:")
