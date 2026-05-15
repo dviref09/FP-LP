@@ -1,13 +1,51 @@
+# Dvir Farkash 333228062
 # question 1
 def evenprt(n1, n2, n3):
+    def enterGenerator(iter, n):
+        for i in enumerate(iter):
+            yield f"{i[1]} " if (i[0] + 1) % n != 0 else f"{i[1]}\n"
     isEven = lambda x: x % 2 == 0
-    result = (n for n in range(n1, n2) if isEven(n))
+    result = (n for n in range(n1, n2 + 1) if isEven(n))
+    return "".join(enterGenerator(result, n3))
 
+def question1():
+    try:
+        n1 = int(input("Enter the value of N1: "))
+        n2 = int(input("Enter the value of N2: "))
+        n3 = int(input("Enter the value of N3: "))
+        if (n1 >= n2 or n3 >= (n2 - n1)):
+            raise ValueError
+        print(evenprt(n1, n2, n3))
+    except ValueError:
+        print("ERROR: at least one of the input values is incorrect")
+        
+# question 2
+def primefactors(n):
+    primeNum = napa(n)
+    return (i for i in range(1, int(n / 2) + 1) if (i in primeNum and n % i == 0))
 
+def napa(n):
+    setOfNonPrimes = set([val for i in range(2, n+1) for val in divisibleByN(i, n) ])
+    return [i for i in range(1, n+1) if (i not in setOfNonPrimes)]
+def divisibleByN(n, maxNum):
+    return [i for i in range(1, maxNum + 1) if (i % n == 0 and i != n)]
+
+def question2():
+    try:
+        n = int(input("Enter a positive number: "))
+        if(n <= 0):
+            raise ValueError
+        print(list(primefactors(n)))
+    except ValueError:
+        print("ERROR: the number must be a positive integer")
+        
+# question 3
+def sortedzip(listOfSubLists):
+    pass
 # running
 def main():
-    lfuncs = []
-    lstrs = ["exit"]
+    lfuncs = [question1, question2]
+    lstrs = ["exit", "print even numbers", "prime factors"]
     
     while True:
         print("your choices:")
