@@ -41,11 +41,62 @@ def question2():
         
 # question 3
 def sortedzip(listOfSubLists):
-    pass
+    return zip(*(sorted(i, key=str) for i in listOfSubLists))
+
+def reversedzip(listOfSubLists):
+    return zip(*(reversed(i) for i in listOfSubLists))
+
+def funczip(func, listOfSubLists):
+    return list(func(listOfSubLists))
+
+def unzippy(zipLists):
+    tupleResult = zip(*zipLists)
+    return list((list(i) for i in tupleResult))
+
+def question3():
+    try:
+        size = int(input("Enter the size of the sublists of the list to process: ")) 
+        if (size < 1):
+            raise ValueError
+    except ValueError:
+        print("ERROR - The size should be an integer!")
+        return
+    
+    try:
+        listOfSubLists = eval(input("Enter the list to process: "))
+    except SyntaxError:
+        print("ERROR - The input should be a valid")
+        return 
+    
+    if (False in (len(i) == size for i in listOfSubLists)):
+        print(f"ERROR - all sublists must be of size {size}")
+        return
+    
+    funcs = {
+        1: sortedzip,
+        2: reversedzip
+    }
+    
+    print("1: sortedzip")
+    print("2: reversedzip")
+    
+    try:
+        funcNum = int(input("Which function do you want to choose? "))
+    except ValueError:
+        print("ERROR - The input should be the number of the function")
+        return
+    
+    try:
+        result = funczip(funcs[funcNum], listOfSubLists)
+        print(result)
+        print(unzippy(result))
+    except KeyError:
+        print("ERROR - chosen function does not exist.")
+
 # running
 def main():
-    lfuncs = [question1, question2]
-    lstrs = ["exit", "print even numbers", "prime factors"]
+    lfuncs = [question1, question2, question3]
+    lstrs = ["exit", "print even numbers", "prime factors", "zip functions"]
     
     while True:
         print("your choices:")
