@@ -17,3 +17,24 @@ create([Head|_], _):- (\+integer(Head); Head < 0), !, write("Invalid input"), nl
 create([Head|Rest], N):- create(Rest, RestN), N is RestN * 10 + Head.
 
 reverseNum(N, Rev):- split(N, Digits), create(Digits, Rev).
+
+subset([], []):-!.
+subset(_, L):- \+is_list(L), !, write("Invalid input"), nl, fail.
+subset([H|T1], [H|T2]):- subset(T1, T2).
+subset(S, [_|T]):- subset(S, T).
+
+listsum([], 0):-!.
+listsum([H|_], Sum):- (\+integer(H); \+integer(Sum)), !, write("Invalid input"), nl, fail.
+listsum([H|T], Sum):- listsum(T, RestSum), Sum is RestSum + H.
+subsum(L, Sum, SubSet):- subset(SubSet, L), (listsum(SubSet, Sum) -> true ; !, fail).
+
+intersection([], _, []):-!.
+intersection(_, [], []):-!.
+intersection(L1, L2, _):- (\+is_list(L1); \+is_list(L2)), !, write("Invalid input"), nl, fail.
+intersection([H|T], L2, L):-member(H, L2), !, intersection(T, L2, Rest), L = [H|Rest].
+intersection([_|T], L2, L):- intersection(T, L2, L). 
+
+minus([], _, []):-!.
+minus(L1, L2, _):- (\+is_list(L1); \+is_list(L2)), !, write("Invalid input"), nl, fail.
+minus([H|T], L2, L):- \+member(H, L2), !, minus(T, L2, Rest), L = [H|Rest].
+minus([_|T], L2, L):- minus(T, L2, L).
